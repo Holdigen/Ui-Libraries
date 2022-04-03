@@ -826,7 +826,7 @@ function Library:Window(title, smalltitle)
         local LabelConstraint = Instance.new("UITextSizeConstraint")
 
         Label.Name = "Label"
-        Label.Parent = game.StarterGui.MainUi.MainFrame.MainPage
+        Label.Parent = MainPage
         Label.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
         Label.BorderSizePixel = 0
         Label.Size = UDim2.new(0, 279, 0, 50)

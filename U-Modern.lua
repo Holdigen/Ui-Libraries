@@ -818,6 +818,53 @@ function Library:Window(title, smalltitle)
 
     end
 
+    function  Window:Label(labelname)
+
+        local Label = Instance.new("Frame")
+        local LabelCorner = Instance.new("UICorner")
+        local LabelText = Instance.new("TextLabel")
+        local LabelConstraint = Instance.new("UITextSizeConstraint")
+
+        Label.Name = "Label"
+        Label.Parent = game.StarterGui.MainUi.MainFrame.MainPage
+        Label.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+        Label.BorderSizePixel = 0
+        Label.Size = UDim2.new(0, 279, 0, 50)
+
+        LabelCorner.CornerRadius = UDim.new(0, 4)
+        LabelCorner.Name = "LabelCorner"
+        LabelCorner.Parent = Label
+
+        LabelText.Name = "LabelText"
+        LabelText.Parent = Label
+        LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        LabelText.BackgroundTransparency = 1.000
+        LabelText.Position = UDim2.new(0.0191077255, 0, 0.0199999809, 0)
+        LabelText.Size = UDim2.new(0.957594812, 0, 0.959999979, 0)
+        LabelText.Font = Enum.Font.Gotham
+        LabelText.Text = labelname
+        LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        LabelText.TextScaled = true
+        LabelText.TextSize = 13.000
+        LabelText.TextWrapped = true
+
+        LabelConstraint.Name = "LabelConstraint"
+        LabelConstraint.Parent = LabelText
+        LabelConstraint.MaxTextSize = 13
+
+        local Config = {}
+
+        function Config:Text(text)
+            LabelText.Text = text
+        end 
+        function Config:Color(color)
+            LabelText.TextColor3 = color
+        end
+
+        return Config
+        
+    end
+
     return Window
 
 end

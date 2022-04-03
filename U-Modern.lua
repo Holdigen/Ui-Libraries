@@ -301,7 +301,7 @@ function Library:Window(title, smalltitle)
         ToggleDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         ToggleDescription.BackgroundTransparency = 1.000
         ToggleDescription.Position = UDim2.new(0.0262761824, 0, 0.119999997, 0)
-        ToggleDescription.Size = UDim2.new(0.537634432, 0, 0.340000004, 0)
+        ToggleDescription.Size = UDim2.new(0.837634432, 0, 0.340000004, 0)
         ToggleDescription.Font = Enum.Font.GothamSemibold
         ToggleDescription.Text = togglename
         ToggleDescription.TextColor3 = Color3.fromRGB(255, 255, 255)

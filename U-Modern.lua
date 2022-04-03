@@ -818,7 +818,7 @@ function Library:Window(title, smalltitle)
 
     end
 
-    function  Window:Label(labelname)
+    function Window:Label(labelname)
 
         local Label = Instance.new("Frame")
         local LabelCorner = Instance.new("UICorner")
@@ -851,6 +851,8 @@ function Library:Window(title, smalltitle)
         LabelConstraint.Name = "LabelConstraint"
         LabelConstraint.Parent = LabelText
         LabelConstraint.MaxTextSize = 13
+		
+	MainPage.CanvasSize = UDim2.new(0, 0, 0, MainPageList.AbsoluteContentSize.Y)
 
         local Config = {}
 

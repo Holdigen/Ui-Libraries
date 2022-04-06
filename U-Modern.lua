@@ -406,7 +406,7 @@ function Library:Window(title, smalltitle)
         SliderDescription.Position = UDim2.new(0.0226921719, 0, 0.596317112, 0)
         SliderDescription.Size = UDim2.new(0.480286747, 0, 0.239999995, 0)
         SliderDescription.Font = Enum.Font.GothamSemibold
-        SliderDescription.Text = "Slider Description"
+        SliderDescription.Text = sliderdescription
         SliderDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
         SliderDescription.TextSize = 11.000
         SliderDescription.TextTransparency = 0.450
@@ -421,7 +421,7 @@ function Library:Window(title, smalltitle)
         SliderText.Position = UDim2.new(0.0262761824, 0, 0.119999997, 0)
         SliderText.Size = UDim2.new(0.537634432, 0, 0.340000004, 0)
         SliderText.Font = Enum.Font.GothamSemibold
-        SliderText.Text = "Slider"
+        SliderText.Text = slidername
         SliderText.TextColor3 = Color3.fromRGB(255, 255, 255)
         SliderText.TextSize = 14.000
         SliderText.TextWrapped = true

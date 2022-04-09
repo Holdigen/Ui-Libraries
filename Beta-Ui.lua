@@ -202,6 +202,10 @@ function Library:Window(gamename, uimaincolor)
         end
     end
 
+    function Library:Theme(newcolor)
+        uimaincolor = newcolor
+    end
+
     local Window = {}
 
     function Window:Page(pagename)
@@ -1766,5 +1770,7 @@ function Library:Window(gamename, uimaincolor)
     return Window
 
 end
+
+print("Hold#4564 was here :-)")
 
 return Library

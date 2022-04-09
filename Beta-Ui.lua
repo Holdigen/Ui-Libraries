@@ -144,7 +144,7 @@ function Library:Window(gamename, uimaincolor)
 		for i, v in next, TextColorElements do
 			if uimaincolor == "nil" then else
 				for d, k in next, VedroxUi:GetDescendants() do
-					if v.Name ~= "HubName" and v.Name ~= "GameName" then
+					if k.Name ~= "HubName" then
                         if k.Name == v then
                             k.TextColor3 = uimaincolor
                         end
@@ -1775,44 +1775,4 @@ end
 
 print("Hold#4564 was here :-)")
 
-
-
-local Window = Library:Window("LOL")
-local Page = Window:Page("Main Page")
-local testPage = Window:Page("Test Page")
-
-local Section = Page:Section("Cool Features")
-
-Section:Button("Test", function()
-    print("Test")
-end)
-local Toggle = Section:Toggle("Nigger", false, function(t)
-    print(t)
-end)
-Section:Button("Toggle Off", function()
-    Toggle:Toggle(false)
-end)
-Section:Button("Toggle On", function()
-    Toggle:Toggle(true)
-end)
-local Slider = Section:Slider("Print", 5, 1000, 340, function(s)
-    print(s)
-end)
-Section:Button("Slide", function()
-    Slider:SlideTo(math.random(5, 1000))
-end)
-Section:Textbox("Nigger balls", "ball amount", function(t)
-    print(t)
-end)
-Section:Line()
-Section:Label("LOL", Color3.fromRGB(222, 222, 222))
-Section:Keybind("Nigger", Enum.KeyCode.F, function(k)
-    print("Nigger", k.Name)
-    Library:Toggle()
-end)
-Section:Dropdown("LUL", {"Piss wasser"}, function(value)
-    print(value)
-end)
-Section:Colorpicker("Color the niaar", Color3.fromRGB(255, 2, 2), function(color)
-    print(color)
-end)
+return Library

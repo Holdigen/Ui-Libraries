@@ -6,7 +6,7 @@ local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
 local Library = {}
 
-function Library:Window(gamename)
+function Library:Window(gamename, uimaincolor)
 
     do
         if CoreGui:FindFirstChild("VedroxUi") then

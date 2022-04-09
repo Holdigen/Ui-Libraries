@@ -491,6 +491,11 @@ function Library:Window(gamename, uimaincolor)
                     toggled = not toggled
                     callback(toggled)
                 end)
+                RunService.RenderStepped:Connect(function()
+                    if toggled == true then
+                        Utility:Tween(ToggleOut, toggletweenspeed, {BackgroundColor3 = uimaincolor})
+                    end
+                end)
 
                 Section.Size = Section.Size + UDim2.new(0, 0, 0, Toggle.Size.Y.Offset + SectionItemList.Padding.Offset)
                 Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)

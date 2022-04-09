@@ -38,6 +38,7 @@ function Library:Window(gamename)
     MainFrame.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
     MainFrame.Position = UDim2.new(0.712622813, 0, 0.599582846, 0)
     MainFrame.Size = UDim2.new(0, 540, 0, 400)
+    MainFrame.ClipsDescendants = true
     
     MainFrameCorner.CornerRadius = UDim.new(0, 3)
     MainFrameCorner.Name = "MainFrameCorner"
@@ -114,6 +115,46 @@ function Library:Window(gamename)
     
     Pages.Name = "Pages"
     Pages.Parent = MainFrame
+
+    local dragToggle = nil
+	local dragSpeed = 0.12
+	local dragStart = nil
+	local startPos = nil
+ 
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		Utility:Tween(MainFrame, dragSpeed, {Position = position})
+	end
+ 
+	DragInput.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = MainFrame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+ 
+	UserInputService.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+
+    function Library:Toggle()
+        if MainFrame.Size == UDim2.new(0, 540, 0, 400) then
+            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 0, 0, 0)})
+        else
+            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 540, 0, 400)})
+        end
+    end
 
     local Window = {}
 
@@ -665,6 +706,7 @@ function Library:Window(gamename)
                     if TextBoxInput.Text ~= "" then
                         TextBoxSelected.Text = TextBoxInput.Text
                         callback(TextBoxInput.Text)
+                        TextBoxInput.Text = ""
                     else
                         TextBoxSelected.Text = ""
                     end

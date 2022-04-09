@@ -2,6 +2,7 @@ local Utility = loadstring(game:HttpGet('https://raw.githubusercontent.com/Holdi
 
 local UserInputService = game:GetService("UserInputService")
 local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
 local Library = {}
@@ -115,6 +116,51 @@ function Library:Window(gamename, uimaincolor)
     
     Pages.Name = "Pages"
     Pages.Parent = MainFrame
+
+    local BackgroundColorElements = {}
+	local TextColorElements = {}
+	local ImageColorElements = {}
+
+    for i, v in next, VedroxUi:GetDescendants() do
+		if v:IsA("Frame") and v.BackgroundColor3 == uimaincolor then
+			table.insert(BackgroundColorElements, v.Name)
+		elseif v:IsA("TextLabel") or v:IsA("TextButton") and v.TextColor3 == uimaincolor then
+			table.insert(TextColorElements, v.Name)
+		elseif v:IsA("ImageLabel") and v.ImageColor3 == uimaincolor then
+			table.insert(ImageColorElements, v.Name)
+		end
+	end
+ 
+	RunService.Heartbeat:Connect(function()
+		for i, v in next, BackgroundColorElements do
+			if uimaincolor == nil then else
+				for d, k in next, VedroxUi:GetDescendants() do
+					if k.Name == v then
+						k.BackgroundColor3 = uimaincolor
+					end
+				end
+			end
+		end
+		for i, v in next, TextColorElements do
+			if uimaincolor == "nil" then else
+				for d, k in next, VedroxUi:GetDescendants() do
+					if k.Name == v then
+						k.TextColor3 = uimaincolor
+					end
+				end
+			end
+		end
+		for i, v in next, ImageColorElements do
+			if uimaincolor == "nil" then else
+				for d, k in next, VedroxUi:GetDescendants() do
+					if k.Name == v then
+						k.ImageColor3 = uimaincolor
+					end
+				end
+			end
+		end
+ 
+	end)
 
     local dragToggle = nil
 	local dragSpeed = 0.12
@@ -1695,6 +1741,18 @@ function Library:Window(gamename, uimaincolor)
                 Section.Size = Section.Size + UDim2.new(0, 0, 0, Colorpicker.Size.Y.Offset + SectionItemList.Padding.Offset)
                 Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)
 
+                local Config = {}
+
+                function Config:Color(newcolor)
+                    CurrentColor.BackgroundColor3 = newcolor
+                    RInput.Text = tostring(math.floor(newcolor.R * 255))
+                    GInput.Text = tostring(math.floor(newcolor.G * 255))
+                    BInput.Text = tostring(math.floor(newcolor.B * 255))
+                    callback(CurrentColor.BackgroundColor3)
+                end
+
+                return Config
+
             end
 
             return Container
@@ -1708,7 +1766,5 @@ function Library:Window(gamename, uimaincolor)
     return Window
 
 end
-
-print("Hold#4564 was here :-)")
 
 return Library

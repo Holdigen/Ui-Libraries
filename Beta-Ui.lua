@@ -604,6 +604,13 @@ function Library:Window(gamename, uimaincolor)
                 local dragging = false
                 local value = startvalue
 
+                RunService.RenderStepped:Connect(function()
+                    if dragging == true then
+                        Utility:Tween(SliderCircle, 0.2, {ImageColor3 = uimaincolor})
+                        Utility:Tween(SliderIn, 0.2, {ImageColor3 = uimaincolor})
+                    end
+                end)
+
                 callback(value)
 
                 do

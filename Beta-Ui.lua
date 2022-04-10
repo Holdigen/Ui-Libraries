@@ -208,7 +208,7 @@ function Library:Window(gamename, uimaincolor)
         uimaincolor = newcolor
     end
 
-    function Library:GetColor()
+    function Library:GetTheme()
         return uimaincolor
     end
 
@@ -1186,7 +1186,7 @@ function Library:Window(gamename, uimaincolor)
                 local Config = {}
 
                 function Config:Selected(newtext)
-                    DropdownText.Text = dropdownname.." + "..newtext
+                    DropdownText.Text = dropdownname.." - "..newtext
                 end
 
                 return Config

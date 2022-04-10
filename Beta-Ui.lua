@@ -208,6 +208,10 @@ function Library:Window(gamename, uimaincolor)
         uimaincolor = newcolor
     end
 
+    function Library:GetColor()
+        return uimaincolor
+    end
+
     local Window = {}
 
     function Window:Page(pagename)

@@ -1179,6 +1179,14 @@ function Library:Window(gamename, uimaincolor)
                 Section.Size = Section.Size + UDim2.new(0, 0, 0, Dropdown.Size.Y.Offset + SectionItemList.Padding.Offset)
                 Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)
 
+                local Config = {}
+
+                function Config:Selected(newtext)
+                    DropdownText.Text = dropdownname.." + "..newtext
+                end
+
+                return Config
+
             end
 
             function Container:Colorpicker(colorpickername, presetcolor, callback)

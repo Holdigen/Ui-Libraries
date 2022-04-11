@@ -224,9 +224,7 @@ function Library:Window(gamename, uimaincolor)
         return uimaincolor
     end
 
-    local Window = {}
-
-    function Window:Notify(text)
+    function Library:Notify(text)
 
         local Notification = Instance.new("Frame")
         local NotificationTop = Instance.new("Frame")
@@ -342,11 +340,12 @@ function Library:Window(gamename, uimaincolor)
             Utility:Tween(Notification, notifytweenduration, {Position = UDim2.new(0.495, 0, 0.495, 0)})
             wait(notifytweenduration)
             NotificationHolder.Visible = false
+            Notification:Destroy()
         end)
         
     end
 
-    function Window:CallbackNotify(text, button1, button2, callback)
+    function Library:CallbackNotify(text, button1, button2, callback)
 
         local callback = callback or function() end
 
@@ -494,6 +493,7 @@ function Library:Window(gamename, uimaincolor)
             Utility:Tween(CallbackNotification, notifytweenduration, {Position = UDim2.new(0.495, 0, 0.495, 0)})
             wait(notifytweenduration)
             NotificationHolder.Visible = false
+            CallbackNotification:Destroy()
         end)
         _2ButtonTrigger.MouseButton1Click:Connect(function()
             callback(_2ButtonTrigger.Text)
@@ -522,6 +522,8 @@ function Library:Window(gamename, uimaincolor)
         end)
         
     end
+
+    local Window = {}
 
     function Window:Page(pagename)
 

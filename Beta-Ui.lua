@@ -768,7 +768,7 @@ function Library:Window(gamename, uimaincolor)
                 TextBoxInputStroke.Thickness = 1
 
                 TextBoxSelectedScale.Name = "TextBoxSelectedScale"
-                TextBoxSelectedScale.Parent = game.StarterGui.VedroxUi.MainFrame.Pages.Page.Section.Textbox.TextBoxSelected
+                TextBoxSelectedScale.Parent = TextBoxSelected
                 TextBoxSelectedScale.MaxTextSize = 14
                 TextBoxSelectedScale.MinTextSize = 8
 

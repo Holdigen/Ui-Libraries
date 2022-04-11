@@ -30,6 +30,7 @@ function Library:Window(gamename, uimaincolor)
     local TabHolderList = Instance.new("UIListLayout")
     local DragInput = Instance.new("Frame")
     local Pages = Instance.new("Folder")
+    local NotificationHolder = Instance.new("Frame")
 
     VedroxUi.Name = "VedroxUi"
     VedroxUi.Parent = CoreGui
@@ -116,6 +117,15 @@ function Library:Window(gamename, uimaincolor)
     
     Pages.Name = "Pages"
     Pages.Parent = MainFrame
+    
+    NotificationHolder.Name = "NotificationHolder"
+    NotificationHolder.Parent = MainFrame
+    NotificationHolder.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    NotificationHolder.BackgroundTransparency = 1 --0.5
+    NotificationHolder.BorderSizePixel = 0
+    NotificationHolder.Size = UDim2.new(0, 539, 0, 400)
+    NotificationHolder.ZIndex = 1
+    NotificationHolder.Visible = false
 
     local BackgroundColorElements = {}
 	local TextColorElements = {}
@@ -196,10 +206,309 @@ function Library:Window(gamename, uimaincolor)
 		end
 	end)
 
+    local notifytweenduration = 0.2
+
+    function Library:Notify(text)
+
+        local Notification = Instance.new("Frame")
+        local NotificationTop = Instance.new("Frame")
+        local NotificationTitle = Instance.new("TextLabel")
+        local NotificationTopCorner = Instance.new("UICorner")
+        local NotificationCorner = Instance.new("UICorner")
+        local NotificationText = Instance.new("TextLabel")
+        local NotificationTextScale = Instance.new("UITextSizeConstraint")
+        local OkayButton = Instance.new("Frame")
+        local OkayButtonCorner = Instance.new("UICorner")
+        local OkayButtonTrigger = Instance.new("TextButton")
+        local OkayButtonStroke = Instance.new("UIStroke")
+
+        Notification.Name = "Notification"
+        Notification.Parent = NotificationHolder
+        Notification.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
+        Notification.BorderSizePixel = 0
+        Notification.Position = UDim2.new(0.495, 0, 0.495, 0) -- UDim2.new(0.226345077, 0, 0.262499988, 0)
+        Notification.Size = UDim2.new(0, 0, 0, 0) -- UDim2.new(0, 295, 0, 189)
+        Notification.Visible = true
+        Notification.ClipsDescendants = true
+
+        NotificationTop.Name = "NotificationTop"
+        NotificationTop.Parent = Notification
+        NotificationTop.BackgroundColor3 = Color3.fromRGB(33, 36, 44)
+        NotificationTop.BorderSizePixel = 0
+        NotificationTop.Size = UDim2.new(0, 294, 0, 46)
+
+        NotificationTitle.Name = "NotificationTitle"
+        NotificationTitle.Parent = NotificationTop
+        NotificationTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationTitle.BackgroundTransparency = 1.000
+        NotificationTitle.Position = UDim2.new(0.0546106882, 0, 0.0370372422, 0)
+        NotificationTitle.Size = UDim2.new(0, 220, 0, 37)
+        NotificationTitle.Font = Enum.Font.GothamBold
+        NotificationTitle.Text = "Notification"
+        NotificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationTitle.TextSize = 14.000
+        NotificationTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+        NotificationTopCorner.CornerRadius = UDim.new(0, 6)
+        NotificationTopCorner.Name = "NotificationTopCorner"
+        NotificationTopCorner.Parent = NotificationTop
+
+        NotificationCorner.CornerRadius = UDim.new(0, 6)
+        NotificationCorner.Name = "NotificationCorner"
+        NotificationCorner.Parent = Notification
+
+        NotificationText.Name = "NotificationText"
+        NotificationText.Parent = Notification
+        NotificationText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationText.BackgroundTransparency = 1.000
+        NotificationText.Position = UDim2.new(0.0442560762, 0, 0.285714298, 0)
+        NotificationText.Size = UDim2.new(0, 266, 0, 82)
+        NotificationText.Font = Enum.Font.GothamSemibold
+        NotificationText.Text = text or "This is a Notification Example."
+        NotificationText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationText.TextScaled = true
+        NotificationText.TextSize = 15.000
+        NotificationText.TextTransparency = 0.200
+        NotificationText.TextWrapped = true
+
+        NotificationTextScale.Name = "NotificationTextScale"
+        NotificationTextScale.Parent = NotificationText
+        NotificationTextScale.MaxTextSize = 15
+        NotificationTextScale.MinTextSize = 10
+
+        OkayButton.Name = "OkayButton"
+        OkayButton.Parent = Notification
+        OkayButton.BackgroundColor3 = Color3.fromRGB(27, 30, 38)
+        OkayButton.Position = UDim2.new(0.029586399, 0, 0.752275109, 0)
+        OkayButton.Size = UDim2.new(0, 277, 0, 40)
+
+        OkayButtonCorner.Name = "OkayButtonCorner"
+        OkayButtonCorner.Parent = OkayButton
+
+        OkayButtonTrigger.Name = "OkayButtonTrigger"
+        OkayButtonTrigger.Parent = OkayButton
+        OkayButtonTrigger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        OkayButtonTrigger.BackgroundTransparency = 1.000
+        OkayButtonTrigger.BorderSizePixel = 0
+        OkayButtonTrigger.Size = UDim2.new(0, 280, 0, 40)
+        OkayButtonTrigger.Font = Enum.Font.GothamBlack
+        OkayButtonTrigger.Text = "OK"
+        OkayButtonTrigger.TextColor3 = Color3.fromRGB(255, 255, 255)
+        OkayButtonTrigger.TextSize = 14.000
+
+        OkayButtonStroke.Name = "OkayButtonStroke"
+        OkayButtonStroke.Parent = Button
+        OkayButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        OkayButtonStroke.Color = Color3.fromRGB(46, 46, 47)
+        OkayButtonStroke.Thickness = 1
+
+        NotificationHolder.Visible = true
+        Utility:Tween(NotificationHolder, notifytweenduration, {BackgroundTransparency = 0.5})
+        Utility:Tween(Notification, notifytweenduration, {Size = UDim2.new(0, 295, 0, 189)})
+        Utility:Tween(Notification, notifytweenduration, {Position = UDim2.new(0.226, 0, 0.262, 0)})
+
+        OkayButtonTrigger.MouseEnter:Connect(function()
+            Utility:Tween(OkayButtonStroke, 0.1, {Color = uimaincolor})
+            Utility:Tween(OkayButtonTrigger, 0.05, {TextSize = 12})
+        end)
+        OkayButtonTrigger.MouseLeave:Connect(function()
+            Utility:Tween(OkayButtonTrigger, 0.05, {TextSize = 14})
+            Utility:Tween(OkayButtonStroke, 0.1, {Color = Color3.fromRGB(46, 46, 47)})
+        end)
+        OkayButtonTrigger.MouseButton1Click:Connect(function()
+            Utility:Tween(OkayButtonTrigger, 0.08, {TextSize = 8}, false)
+            Utility:Tween(OkayButtonTrigger, 0.10, {TextSize = 16}, false)
+            Utility:Tween(OkayButtonTrigger, 0.12, {TextSize = 14}, false)
+            Utility:Tween(NotificationHolder, notifytweenduration, {BackgroundTransparency = 1})
+            Utility:Tween(Notification, notifytweenduration, {Size = UDim2.new(0, 0, 0, 0)})
+            Utility:Tween(Notification, notifytweenduration, {Position = UDim2.new(0.495, 0, 0.495, 0)})
+            wait(notifytweenduration)
+            NotificationHolder.Visible = false
+        end)
+        
+    end
+
+    function Library:CallbackNotify(text, button1, button2, callback)
+
+        local callback = callback or function() end
+
+        local CallbackNotification = Instance.new("Frame")
+        local NotificationTop = Instance.new("Frame")
+        local NotificationTitle = Instance.new("TextLabel")
+        local NotificationTopCorner = Instance.new("UICorner")
+        local CallbackCorner = Instance.new("UICorner")
+        local NotificationText = Instance.new("TextLabel")
+        local NotificationTextScale = Instance.new("UITextSizeConstraint")
+        local _1Button = Instance.new("Frame")
+        local _1ButtonCorner = Instance.new("UICorner")
+        local _1ButtonTrigger = Instance.new("TextButton")
+        local _1ButtonStroke = Instance.new("UIStroke")
+        local _2Button = Instance.new("Frame")
+        local _2ButtonCorner = Instance.new("UICorner")
+        local _2ButtonTrigger = Instance.new("TextButton")
+        local _2ButtonStroke = Instance.new("UIStroke")
+
+        CallbackNotification.Name = "CallbackNotification"
+        CallbackNotification.Parent = NotificationHolder
+        CallbackNotification.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
+        CallbackNotification.BorderSizePixel = 0
+        CallbackNotification.Position = UDim2.new(0.495, 0, 0.495, 0) -- UDim2.new(0.226345077, 0, 0.262499988, 0)
+        CallbackNotification.Size = UDim2.new(0, 0, 0, 0) -- UDim2.new(0, 295, 0, 189)
+        CallbackNotification.Visible = true
+        CallbackNotification.ClipsDescendants = true
+        
+        NotificationTop.Name = "NotificationTop"
+        NotificationTop.Parent = CallbackNotification
+        NotificationTop.BackgroundColor3 = Color3.fromRGB(33, 36, 44)
+        NotificationTop.BorderSizePixel = 0
+        NotificationTop.Size = UDim2.new(0, 294, 0, 46)
+        
+        NotificationTitle.Name = "NotificationTitle"
+        NotificationTitle.Parent = NotificationTop
+        NotificationTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationTitle.BackgroundTransparency = 1.000
+        NotificationTitle.Position = UDim2.new(0.0546106882, 0, 0.0370372422, 0)
+        NotificationTitle.Size = UDim2.new(0, 220, 0, 37)
+        NotificationTitle.Font = Enum.Font.GothamBold
+        NotificationTitle.Text = "Notification"
+        NotificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationTitle.TextSize = 14.000
+        NotificationTitle.TextXAlignment = Enum.TextXAlignment.Left
+        
+        NotificationTopCorner.CornerRadius = UDim.new(0, 6)
+        NotificationTopCorner.Name = "NotificationTopCorner"
+        NotificationTopCorner.Parent = NotificationTop
+        
+        CallbackCorner.CornerRadius = UDim.new(0, 6)
+        CallbackCorner.Name = "CallbackCorner"
+        CallbackCorner.Parent = CallbackNotification
+        
+        NotificationText.Name = "NotificationText"
+        NotificationText.Parent = CallbackNotification
+        NotificationText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationText.BackgroundTransparency = 1.000
+        NotificationText.Position = UDim2.new(0.0442560762, 0, 0.285714298, 0)
+        NotificationText.Size = UDim2.new(0, 266, 0, 82)
+        NotificationText.Font = Enum.Font.GothamSemibold
+        NotificationText.Text = text or "This is a Notification Example."
+        NotificationText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        NotificationText.TextScaled = true
+        NotificationText.TextSize = 15.000
+        NotificationText.TextTransparency = 0.200
+        NotificationText.TextWrapped = true
+        
+        NotificationTextScale.Name = "NotificationTextScale"
+        NotificationTextScale.Parent = NotificationText
+        NotificationTextScale.MaxTextSize = 15
+        NotificationTextScale.MinTextSize = 10
+        
+        _1Button.Name = "1Button"
+        _1Button.Parent = CallbackNotification
+        _1Button.BackgroundColor3 = Color3.fromRGB(27, 30, 38)
+        _1Button.Position = UDim2.new(0.0295863263, 0, 0.752275109, 0)
+        _1Button.Size = UDim2.new(0, 130, 0, 40)
+        
+        _1ButtonCorner.Name = "1ButtonCorner"
+        _1ButtonCorner.Parent = _1Button
+        
+        _1ButtonTrigger.Name = "1ButtonTrigger"
+        _1ButtonTrigger.Parent = _1Button
+        _1ButtonTrigger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        _1ButtonTrigger.BackgroundTransparency = 1.000
+        _1ButtonTrigger.BorderSizePixel = 0
+        _1ButtonTrigger.Size = UDim2.new(0, 130, 0, 40)
+        _1ButtonTrigger.Font = Enum.Font.GothamBlack
+        _1ButtonTrigger.Text = button2 or "NO"
+        _1ButtonTrigger.TextColor3 = Color3.fromRGB(255, 255, 255)
+        _1ButtonTrigger.TextSize = 14.000
+
+        _1ButtonStroke.Name = "_1ButtonStroke"
+        _1ButtonStroke.Parent = _1Button
+        _1ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        _1ButtonStroke.Color = Color3.fromRGB(46, 46, 47)
+        _1ButtonStroke.Thickness = 1
+        
+        _2Button.Name = "2Button"
+        _2Button.Parent = CallbackNotification
+        _2Button.BackgroundColor3 = Color3.fromRGB(27, 30, 38)
+        _2Button.Position = UDim2.new(0.534671068, 0, 0.752275109, 0)
+        _2Button.Size = UDim2.new(0, 130, 0, 40)
+        
+        _2ButtonCorner.Name = "2ButtonCorner"
+        _2ButtonCorner.Parent = _2Button
+        
+        _2ButtonTrigger.Name = "2ButtonTrigger"
+        _2ButtonTrigger.Parent = _2Button
+        _2ButtonTrigger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        _2ButtonTrigger.BackgroundTransparency = 1.000
+        _2ButtonTrigger.BorderSizePixel = 0
+        _2ButtonTrigger.Size = UDim2.new(0, 130, 0, 40)
+        _2ButtonTrigger.Font = Enum.Font.GothamBlack
+        _2ButtonTrigger.Text = button1 or "YES"
+        _2ButtonTrigger.TextColor3 = Color3.fromRGB(255, 255, 255)
+        _2ButtonTrigger.TextSize = 14.000
+
+        _2ButtonStroke.Name = "_2ButtonStroke"
+        _2ButtonStroke.Parent = _2Button
+        _2ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        _2ButtonStroke.Color = Color3.fromRGB(46, 46, 47)
+        _2ButtonStroke.Thickness = 1
+
+        NotificationHolder.Visible = true
+        Utility:Tween(NotificationHolder, notifytweenduration, {BackgroundTransparency = 0.5})
+        Utility:Tween(CallbackNotification, notifytweenduration, {Size = UDim2.new(0, 295, 0, 189)})
+        Utility:Tween(CallbackNotification, notifytweenduration, {Position = UDim2.new(0.226, 0, 0.262, 0)})
+
+        _2Button.MouseEnter:Connect(function()
+            Utility:Tween(_2ButtonStroke, 0.1, {Color = uimaincolor})
+            Utility:Tween(_2ButtonTrigger, 0.05, {TextSize = 12})
+        end)
+        _2Button.MouseLeave:Connect(function()
+            Utility:Tween(_2ButtonTrigger, 0.05, {TextSize = 14})
+            Utility:Tween(_2ButtonStroke, 0.1, {Color = Color3.fromRGB(46, 46, 47)})
+        end)
+        _2ButtonTrigger.MouseButton1Click:Connect(function()
+            Utility:Tween(_2ButtonTrigger, 0.08, {TextSize = 8}, false)
+            Utility:Tween(_2ButtonTrigger, 0.10, {TextSize = 16}, false)
+            Utility:Tween(_2ButtonTrigger, 0.12, {TextSize = 14}, false)
+            Utility:Tween(NotificationHolder, notifytweenduration, {BackgroundTransparency = 1})
+            Utility:Tween(CallbackNotification, notifytweenduration, {Size = UDim2.new(0, 0, 0, 0)})
+            Utility:Tween(CallbackNotification, notifytweenduration, {Position = UDim2.new(0.495, 0, 0.495, 0)})
+            wait(notifytweenduration)
+            NotificationHolder.Visible = false
+        end)
+        _2ButtonTrigger.MouseButton1Click:Connect(function()
+            callback(_2ButtonTrigger.Text)
+        end)
+
+        _1Button.MouseEnter:Connect(function()
+            Utility:Tween(_1ButtonStroke, 0.1, {Color = uimaincolor})
+            Utility:Tween(_1ButtonTrigger, 0.05, {TextSize = 12})
+        end)
+        _1Button.MouseLeave:Connect(function()
+            Utility:Tween(_1ButtonTrigger, 0.05, {TextSize = 14})
+            Utility:Tween(_1ButtonStroke, 0.1, {Color = Color3.fromRGB(46, 46, 47)})
+        end)
+        _1ButtonTrigger.MouseButton1Click:Connect(function()
+            Utility:Tween(_1ButtonTrigger, 0.08, {TextSize = 8}, false)
+            Utility:Tween(_1ButtonTrigger, 0.10, {TextSize = 16}, false)
+            Utility:Tween(_1ButtonTrigger, 0.12, {TextSize = 14}, false)
+            Utility:Tween(NotificationHolder, notifytweenduration, {BackgroundTransparency = 1})
+            Utility:Tween(CallbackNotification, notifytweenduration, {Size = UDim2.new(0, 0, 0, 0)})
+            Utility:Tween(CallbackNotification, notifytweenduration, {Position = UDim2.new(0.495, 0, 0.495, 0)})
+            wait(notifytweenduration)
+            NotificationHolder.Visible = false
+        end)
+        _1ButtonTrigger.MouseButton1Click:Connect(function()
+            callback(_1ButtonTrigger.Text)
+        end)
+        
+    end
+
     function Library:Toggle()
         if MainFrame.Size == UDim2.new(0, 540, 0, 400) then
             Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 0, 0, 0)})
-        else
+        elseif MainFrame.Size == UDim2.new(0, 0, 0, 0) then
             Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 540, 0, 400)})
         end
     end
@@ -594,7 +903,7 @@ function Library:Window(gamename, uimaincolor)
                 SliderCircle.BackgroundTransparency = 1.000
                 SliderCircle.Position = UDim2.new(0.426666647, 0, -0.599999964, 0)
                 SliderCircle.Size = UDim2.new(0, 22, 0, 22)
-                SliderCircle.ZIndex = 3
+                SliderCircle.ZIndex = 1
                 SliderCircle.Image = "rbxassetid://3926305904"
                 SliderCircle.ImageRectOffset = Vector2.new(204, 484)
                 SliderCircle.ImageRectSize = Vector2.new(36, 36)
@@ -1046,7 +1355,7 @@ function Library:Window(gamename, uimaincolor)
                 ArrowDown.BackgroundTransparency = 1.000
                 ArrowDown.Position = UDim2.new(0.904518247, 0, 0.160150379, 0)
                 ArrowDown.Size = UDim2.new(0, 25, 0, 25)
-                ArrowDown.ZIndex = 2
+                ArrowDown.ZIndex = 1
                 ArrowDown.Image = "rbxassetid://3926305904"
                 ArrowDown.ImageRectOffset = Vector2.new(44, 404)
                 ArrowDown.ImageRectSize = Vector2.new(36, 36)
@@ -1057,7 +1366,7 @@ function Library:Window(gamename, uimaincolor)
                 ArrowUp.BackgroundTransparency = 1.000
                 ArrowUp.Position = UDim2.new(0.904518247, 0, 0.160150379, 0)
                 ArrowUp.Size = UDim2.new(0, 25, 0, 25)
-                ArrowUp.ZIndex = 2
+                ArrowUp.ZIndex = 1
                 ArrowUp.Image = "rbxassetid://3926305904"
                 ArrowUp.ImageRectOffset = Vector2.new(564, 284)
                 ArrowUp.ImageRectSize = Vector2.new(36, 36)

@@ -297,7 +297,7 @@ function Library:Window(gamename, uimaincolor)
         OkayButtonTrigger.TextSize = 14.000
 
         OkayButtonStroke.Name = "OkayButtonStroke"
-        OkayButtonStroke.Parent = Button
+        OkayButtonStroke.Parent = OkayButton
         OkayButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
         OkayButtonStroke.Color = Color3.fromRGB(46, 46, 47)
         OkayButtonStroke.Thickness = 1

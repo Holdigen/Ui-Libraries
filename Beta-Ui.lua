@@ -208,7 +208,25 @@ function Library:Window(gamename, uimaincolor)
 
     local notifytweenduration = 0.2
 
-    function Library:Notify(text)
+    function Library:Toggle()
+        if MainFrame.Size == UDim2.new(0, 540, 0, 400) then
+            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 0, 0, 0)})
+        elseif MainFrame.Size == UDim2.new(0, 0, 0, 0) then
+            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 540, 0, 400)})
+        end
+    end
+
+    function Library:Theme(newcolor)
+        uimaincolor = newcolor
+    end
+
+    function Library:GetTheme()
+        return uimaincolor
+    end
+
+    local Window = {}
+
+    function Window:Notify(text)
 
         local Notification = Instance.new("Frame")
         local NotificationTop = Instance.new("Frame")
@@ -328,7 +346,7 @@ function Library:Window(gamename, uimaincolor)
         
     end
 
-    function Library:CallbackNotify(text, button1, button2, callback)
+    function Window:CallbackNotify(text, button1, button2, callback)
 
         local callback = callback or function() end
 
@@ -504,24 +522,6 @@ function Library:Window(gamename, uimaincolor)
         end)
         
     end
-
-    function Library:Toggle()
-        if MainFrame.Size == UDim2.new(0, 540, 0, 400) then
-            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 0, 0, 0)})
-        elseif MainFrame.Size == UDim2.new(0, 0, 0, 0) then
-            Utility:Tween(MainFrame, 0.12, {Size = UDim2.new(0, 540, 0, 400)})
-        end
-    end
-
-    function Library:Theme(newcolor)
-        uimaincolor = newcolor
-    end
-
-    function Library:GetTheme()
-        return uimaincolor
-    end
-
-    local Window = {}
 
     function Window:Page(pagename)
 

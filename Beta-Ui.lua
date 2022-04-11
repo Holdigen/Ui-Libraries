@@ -705,6 +705,7 @@ function Library:Window(gamename, uimaincolor)
                 local TextBoxInputCorner = Instance.new("UICorner")
                 local TextBoxSelected = Instance.new("TextLabel")
                 local TextBoxInputStroke = Instance.new("UIStroke")
+                local TextBoxSelectedScale = Instance.new("UITextSizeConstraint")
 
                 Textbox.Name = "Textbox"
                 Textbox.Parent = Section
@@ -758,12 +759,18 @@ function Library:Window(gamename, uimaincolor)
                 TextBoxSelected.TextSize = 14.000
                 TextBoxSelected.TextTransparency = 0.400
                 TextBoxSelected.TextXAlignment = Enum.TextXAlignment.Right
+                TextBoxSelected.TextScaled = true
 
                 TextBoxInputStroke.Name = "TextBoxInputStroke"
                 TextBoxInputStroke.Parent = TextBoxInput
                 TextBoxInputStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
                 TextBoxInputStroke.Color = Color3.fromRGB(46, 46, 47)
                 TextBoxInputStroke.Thickness = 1
+
+                TextBoxSelectedScale.Name = "TextBoxSelectedScale"
+                TextBoxSelectedScale.Parent = game.StarterGui.VedroxUi.MainFrame.Pages.Page.Section.Textbox.TextBoxSelected
+                TextBoxSelectedScale.MaxTextSize = 14
+                TextBoxSelectedScale.MinTextSize = 8
 
                 TextBoxInput.Focused:Connect(function()
                     Utility:Tween(TextBoxInputStroke, 0.1, {Color = uimaincolor})

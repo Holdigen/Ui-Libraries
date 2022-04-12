@@ -1219,7 +1219,7 @@ function Library:Window(gamename, uimaincolor)
                 KeybindName.Position = UDim2.new(0.0280898884, 0, 0.00500052329, 0)
                 KeybindName.Size = UDim2.new(0, 168, 0, 30)
                 KeybindName.Font = Enum.Font.GothamSemibold
-                KeybindName.Text = "Keybind"
+                KeybindName.Text = keybindname or "Keybind"
                 KeybindName.TextColor3 = Color3.fromRGB(255, 255, 255)
                 KeybindName.TextSize = 14.000
                 KeybindName.TextTransparency = 0.200

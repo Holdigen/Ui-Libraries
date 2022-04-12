@@ -1443,7 +1443,6 @@ function Library:Window(gamename, uimaincolor)
                         framesize = framesize + 40 + 2
                     end
 
-                    DropdownItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropdownItemHolderList.AbsoluteContentSize.Y)
                     DropdownItemHolder.Size = UDim2.new(0, 340, 0, framesize + 2)
 
                     local Item = Instance.new("TextButton")
@@ -1472,6 +1471,8 @@ function Library:Window(gamename, uimaincolor)
                     ItemStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
                     ItemStroke.Color = Color3.fromRGB(46, 46, 47)
                     ItemStroke.Thickness = 1
+
+                    DropdownItemHolder.CanvasSize = UDim2.new(0, 0, 0, DropdownItemHolderList.AbsoluteContentSize.Y + 2)
 
                     Item.MouseEnter:Connect(function()
                         Utility:Tween(ItemStroke, 0.1, {Color = uimaincolor})

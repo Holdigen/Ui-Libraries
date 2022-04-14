@@ -5,15 +5,18 @@ local CoreGui = game:GetService("CoreGui")
 local RunService = game:GetService("RunService")
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
+do
+    if CoreGui:FindFirstChild("VedroxUi") then
+        CoreGui:FindFirstChild("VedroxUi"):Destroy()
+    end
+    if CoreGui:FindFirstChild("VedroxKey") then
+        CoreGui:FindFirstChild("VedroxKey"):Destroy()
+    end
+end
+
 local Library = {}
 
 function Library:Window(gamename, uimaincolor)
-
-    do
-        if CoreGui:FindFirstChild("VedroxUi") then
-            CoreGui:FindFirstChild("VedroxUi"):Destroy()
-        end
-    end
 
     local uimaincolor = uimaincolor or Color3.fromRGB(19, 139, 194)
 
@@ -38,8 +41,8 @@ function Library:Window(gamename, uimaincolor)
     MainFrame.Name = "MainFrame"
     MainFrame.Parent = VedroxUi
     MainFrame.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
-    MainFrame.Position = UDim2.new(0.712622813, 0, 0.599582846, 0)
-    MainFrame.Size = UDim2.new(0, 540, 0, 400)
+    MainFrame.Position = UDim2.new(0.9, 0, 0.731, 0)
+    MainFrame.Size = UDim2.new(0, 0, 0, 0)
     MainFrame.ClipsDescendants = true
     
     MainFrameCorner.CornerRadius = UDim.new(0, 3)
@@ -126,6 +129,9 @@ function Library:Window(gamename, uimaincolor)
     NotificationHolder.Size = UDim2.new(0, 539, 0, 400)
     NotificationHolder.ZIndex = 1
     NotificationHolder.Visible = false
+
+    Utility:Tween(MainFrame, 0.2, {Size = UDim2.new(0, 540, 0, 400)})
+    Utility:Tween(MainFrame, 0.2, {Position = UDim2.new(0.7, 0, 0.586, 0)})
 
     local BackgroundColorElements = {}
 	local TextColorElements = {}
@@ -762,7 +768,7 @@ function Library:Window(gamename, uimaincolor)
                 ToggleOn.Parent = Toggle
                 ToggleOn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                 ToggleOn.BackgroundTransparency = 1.000
-                ToggleOn.Position = UDim2.new(0.91700003, 0, 0.275000006, 0)
+                ToggleOn.Position = UDim2.new(0.91850003, 0, 0.275000006, 0)
                 ToggleOn.Size = UDim2.new(0, 18, 0, 18)
                 ToggleOn.Image = "rbxassetid://3926305904"
                 ToggleOn.ImageRectOffset = Vector2.new(644, 204)
@@ -773,7 +779,7 @@ function Library:Window(gamename, uimaincolor)
                 ToggleOff.Parent = Toggle
                 ToggleOff.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                 ToggleOff.BackgroundTransparency = 1.000
-                ToggleOff.Position = UDim2.new(0.91700003, 0, 0.275000006, 0)
+                ToggleOff.Position = UDim2.new(0.918500003, 0, 0.275000006, 0)
                 ToggleOff.Size = UDim2.new(0, 18, 0, 18)
                 ToggleOff.Image = "rbxassetid://3926305904"
                 ToggleOff.ImageRectOffset = Vector2.new(924, 724)
@@ -905,7 +911,7 @@ function Library:Window(gamename, uimaincolor)
                 SliderCircle.BackgroundTransparency = 1.000
                 SliderCircle.Position = UDim2.new(0.426666647, 0, -0.599999964, 0)
                 SliderCircle.Size = UDim2.new(0, 22, 0, 22)
-                SliderCircle.ZIndex = 1
+                SliderCircle.ZIndex = 2
                 SliderCircle.Image = "rbxassetid://3926305904"
                 SliderCircle.ImageRectOffset = Vector2.new(204, 484)
                 SliderCircle.ImageRectSize = Vector2.new(36, 36)
@@ -946,8 +952,6 @@ function Library:Window(gamename, uimaincolor)
                     function(input)
                         if input.UserInputType == Enum.UserInputType.MouseButton1 then
                             dragging = true
-                            Utility:Tween(SliderCircle, 0.2, {ImageColor3 = uimaincolor})
-                            Utility:Tween(SliderIn, 0.2, {ImageColor3 = uimaincolor})
                         end
                     end
                 )
@@ -955,17 +959,20 @@ function Library:Window(gamename, uimaincolor)
                     function(input)
                         if input.UserInputType == Enum.UserInputType.MouseButton1 then
                             dragging = false
-                            Utility:Tween(SliderCircle, 0.2, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
-                            Utility:Tween(SliderIn, 0.2, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
                         end
                     end
                 )
                 UserInputService.InputChanged:Connect(function(input)
                     if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
                         move(input)
+                        Utility:Tween(SliderCircle, 0.2, {ImageColor3 = uimaincolor})
+                        Utility:Tween(SliderIn, 0.2, {ImageColor3 = uimaincolor})
+                    elseif not dragging then
+                        Utility:Tween(SliderCircle, 0.2, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
+                        Utility:Tween(SliderIn, 0.2, {ImageColor3 = Color3.fromRGB(255, 255, 255)})
                     end
                 end)
-                SliderTrigger.MouseButton1Click:Connect(function()
+                --[[SliderTrigger.MouseButton1Click:Connect(function()
                     SliderIn.Size = UDim2.new(0, math.clamp(Mouse.X - SliderIn.AbsolutePosition.X, 0, 150), 0, 10)
                     SliderCircle.Position = UDim2.new(math.clamp((Mouse.X - SliderOut.AbsolutePosition.X) / SliderOut.AbsoluteSize.X, 0, 1), -10, -0.6, 0)
                     value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * SliderIn.AbsoluteSize.X) + tonumber(minvalue))
@@ -986,7 +993,7 @@ function Library:Window(gamename, uimaincolor)
                             releaseconnection:Disconnect()
                         end
                     end)
-                end)
+                end)]]
 
                 Section.Size = Section.Size + UDim2.new(0, 0, 0, Slider.Size.Y.Offset + SectionItemList.Padding.Offset)
                 Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)

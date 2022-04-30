@@ -3,7 +3,7 @@ local ui_options = {
 	min_size = Vector2.new(400, 365),
 	toggle_key = Enum.KeyCode.RightShift,
 	can_resize = true,
-	logo = "rbxassetid://12345678"
+	logo = "rbxassetid://12345678",
 }
 
 
@@ -964,10 +964,10 @@ function library:AddWindow(title, options)
 		local Base = Bar:FindFirstChild("Base")
 		local Top = Bar:FindFirstChild("Top")
 		local SplitFrame = Window:FindFirstChild("TabSelection"):FindFirstChild("Frame")
-		local Toggle = Bar:FindFirstChild("Toggle")
+		local Toggle = Bar:WaitForChild("Toggle")
 		
+		Toggle.Image = options.logo
 		spawn(function()
-			Toggle.Image = options.logo
 			while true do
 				Bar.BackgroundColor3 = options.main_color
 				Base.BackgroundColor3 = options.main_color

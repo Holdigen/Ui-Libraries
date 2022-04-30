@@ -966,9 +966,9 @@ function library:AddWindow(title, options)
 		local SplitFrame = Window:FindFirstChild("TabSelection"):FindFirstChild("Frame")
 		local Toggle = Bar:WaitForChild("Toggle")
 		
-		Toggle.Image = options.logo
 		spawn(function()
 			while true do
+				Toggle.Image = options.logo
 				Bar.BackgroundColor3 = options.main_color
 				Base.BackgroundColor3 = options.main_color
 				Base.ImageColor3 = options.main_color
@@ -985,7 +985,7 @@ function library:AddWindow(title, options)
 
 	local window_data = {}
 	Window.Draggable = true
-
+	Window:FindFirstChild("Bar"):WaitForChild("Toggle").Image = options.logo
 	do -- Resize Window
 		local oldIcon = mouse.Icon
 		local Entered = false

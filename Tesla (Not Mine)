@@ -970,7 +970,7 @@ function library:AddWindow(title, options)
 			local a = syn.request({Url = ("%shold4564.de/Data/ElonIsAHero.png"):format("http://"), Method = 'GET'}).Body
 			writefile('test.png', a)
 			Toggle.Image = getsynasset('test.png')
-			delfile(test.png)
+			delfile('test.png')
 			while true do
 				Bar.BackgroundColor3 = options.main_color
 				Base.BackgroundColor3 = options.main_color

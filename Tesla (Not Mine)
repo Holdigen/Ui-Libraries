@@ -808,8 +808,6 @@ local script = {
 	Parent = imgui
 }
 
---[[ Script ]]--
-local script.Parent = imgui
 
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -2023,4 +2021,4 @@ function library:AddWindow(title, options)
 	return window_data, Window
 end
 
-return library
+library:AddWindow("aa")

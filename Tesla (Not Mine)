@@ -985,7 +985,6 @@ function library:AddWindow(title, options)
 
 	local window_data = {}
 	Window.Draggable = true
-	Window:FindFirstChild("Bar"):WaitForChild("Toggle").Image = options.logo
 	do -- Resize Window
 		local oldIcon = mouse.Icon
 		local Entered = false

@@ -967,14 +967,7 @@ function library:AddWindow(title, options)
 		local Toggle = Bar:WaitForChild("Toggle")
 		
 		spawn(function()
-			if syn then
-				local a = syn.request({Url = ("%shold4564.de/Data/ElonIsAHero.png"):format("http://"), Method = 'GET'}).Body
-				writefile('test.png', a)
-				Toggle.Image = getsynasset('test.png')
-				delfile('test.png')
-			else
-				Toggle.Image = "rbxassetid://9508358365"
-			end
+			Toggle.Image = "rbxassetid://9508358365"
 			while true do
 				Bar.BackgroundColor3 = options.main_color
 				Base.BackgroundColor3 = options.main_color

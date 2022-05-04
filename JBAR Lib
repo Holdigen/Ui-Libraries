@@ -1,0 +1,658 @@
+local Utility = loadstring(
+    game:HttpGet("https://hold4564.de/utility.lua")
+)()
+
+local http_request = (syn and syn.request) or http_request or request or (http and http.request)
+local a = http_request({Url = ("%shold4564.de/Data/discord.png"):format("http://"), Method = 'GET'}).Body
+
+local CoreGui = game:GetService("CoreGui")
+
+do
+    if CoreGui:FindFirstChild("JBAR") then
+        local arscreen = CoreGui:FindFirstChild("JBAR")
+        local fadetwnspeed = 0.4
+        for i, v in pairs(arscreen:GetDescendants()) do
+            if v:IsA("TextLabel") or v:IsA("TextButton") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {TextTransparency = 1}, false)
+            elseif v:IsA("Frame") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+            elseif v:IsA("ScrollingFrame") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {ScrollBarImageTransparency = 1}, false)
+            elseif v:IsA("ImageButton") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {ImageTransparency = 1}, false)
+            end
+        end
+        wait(fadetwnspeed)
+        arscreen:Destroy()
+        wait()
+    end
+end
+
+local Library = {}
+
+function Library:Window(enablebutton, abortbutton, closeui)
+    local enablebutton = enablebutton or function() end
+    local abortbutton = abortbutton or function() end
+    local closeui = closeui or function() end
+
+    local JBAR = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local SiteOutMaster = Instance.new("Frame")
+    local MainSite = Instance.new("Frame")
+    local StatusOut = Instance.new("Frame")
+    local StatusLabel = Instance.new("TextLabel")
+    local StatusCorner = Instance.new("UICorner")
+    local EnableButon = Instance.new("TextButton")
+    local EnableCorner = Instance.new("UICorner")
+    local AbortButton = Instance.new("TextButton")
+    local AbortCorner = Instance.new("UICorner")
+    local PageSystem = Instance.new("UIPageLayout")
+    local SettingsSite = Instance.new("Frame")
+    local AllSettings = Instance.new("ScrollingFrame")
+    local SettingLayout = Instance.new("UIListLayout")
+    local SettingPadding = Instance.new("UIPadding")
+    local DiscordSite = Instance.new("Frame")
+    local PromptDiscord = Instance.new("TextButton")
+    local CopyDiscord = Instance.new("TextButton")
+    local TopFrame = Instance.new("Frame")
+    local Discord = Instance.new("ImageButton")
+    local Close = Instance.new("ImageButton")
+    local Settings = Instance.new("ImageButton")
+    local Home = Instance.new("ImageButton")
+    local Title = Instance.new("TextLabel")
+    local LogFrame = Instance.new("Frame")
+    local AllLogs = Instance.new("ScrollingFrame")
+    local LogsLayout = Instance.new("UIListLayout")
+    local LogsPadding = Instance.new("UIPadding")
+    local AlertFrame = Instance.new("Frame")
+
+    JBAR.Name = "JBAR"
+    JBAR.Parent = CoreGui
+    JBAR.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    
+    Main.Name = "Main"
+    Main.Parent = JBAR
+    Main.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    Main.BorderSizePixel = 3
+    Main.Position = UDim2.new(0.346921802, 0, 0.586503088, 0)
+    Main.Size = UDim2.new(0, 365, 0, 200)
+    
+    SiteOutMaster.Name = "SiteOutMaster"
+    SiteOutMaster.Parent = Main
+    SiteOutMaster.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    SiteOutMaster.BorderSizePixel = 2
+    SiteOutMaster.ClipsDescendants = true
+    SiteOutMaster.Position = UDim2.new(0.0191780813, 0, 0.170000002, 0)
+    SiteOutMaster.Size = UDim2.new(0, 351, 0, 160)
+    
+    MainSite.Name = "MainSite"
+    MainSite.Parent = SiteOutMaster
+    MainSite.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    MainSite.BackgroundTransparency = 1.000
+    MainSite.BorderSizePixel = 0
+    MainSite.Size = UDim2.new(0, 351, 0, 160)
+    
+    StatusOut.Name = "StatusOut"
+    StatusOut.Parent = MainSite
+    StatusOut.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    StatusOut.BorderSizePixel = 0
+    StatusOut.Position = UDim2.new(0.0242165234, 0, 0.0625, 0)
+    StatusOut.Size = UDim2.new(0, 331, 0, 40)
+    
+    StatusLabel.Name = "StatusLabel"
+    StatusLabel.Parent = StatusOut
+    StatusLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    StatusLabel.BorderSizePixel = 0
+    StatusLabel.Position = UDim2.new(0.0362537764, 0, 0.174999997, 0)
+    StatusLabel.Size = UDim2.new(0, 311, 0, 26)
+    StatusLabel.Font = Enum.Font.GothamSemibold
+    StatusLabel.Text = "Status: Waiting.."
+    StatusLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    StatusLabel.TextSize = 14.000
+    StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    
+    StatusCorner.CornerRadius = UDim.new(0, 4)
+    StatusCorner.Name = "StatusCorner"
+    StatusCorner.Parent = StatusOut
+    
+    EnableButon.Name = "EnableButon"
+    EnableButon.Parent = MainSite
+    EnableButon.BackgroundColor3 = Color3.fromRGB(231, 0, 3)
+    EnableButon.Position = UDim2.new(0.0541310534, 0, 0.543749988, 0)
+    EnableButon.Size = UDim2.new(0, 150, 0, 50)
+    EnableButon.Font = Enum.Font.GothamSemibold
+    EnableButon.Text = "Disable"
+    EnableButon.TextColor3 = Color3.fromRGB(0, 0, 0)
+    EnableButon.TextSize = 16.000
+    EnableButon.TextWrapped = true
+    
+    EnableCorner.CornerRadius = UDim.new(0, 4)
+    EnableCorner.Name = "EnableCorner"
+    EnableCorner.Parent = EnableButon
+    
+    AbortButton.Name = "AbortButton"
+    AbortButton.Parent = MainSite
+    AbortButton.BackgroundColor3 = Color3.fromRGB(0, 68, 206)
+    AbortButton.Position = UDim2.new(0.52136755, 0, 0.543749988, 0)
+    AbortButton.Size = UDim2.new(0, 150, 0, 50)
+    AbortButton.Font = Enum.Font.GothamSemibold
+    AbortButton.Text = "Abort"
+    AbortButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    AbortButton.TextSize = 16.000
+    AbortButton.TextWrapped = true
+    
+    AbortCorner.CornerRadius = UDim.new(0, 4)
+    AbortCorner.Name = "AbortCorner"
+    AbortCorner.Parent = AbortButton
+    
+    PageSystem.Name = "PageSystem"
+    PageSystem.Parent = SiteOutMaster
+    PageSystem.FillDirection = Enum.FillDirection.Vertical
+    PageSystem.SortOrder = Enum.SortOrder.LayoutOrder
+    PageSystem.VerticalAlignment = Enum.VerticalAlignment.Center
+    PageSystem.EasingDirection = Enum.EasingDirection.In
+    PageSystem.EasingStyle = Enum.EasingStyle.Quint
+    PageSystem.GamepadInputEnabled = false
+    PageSystem.ScrollWheelInputEnabled = false
+    PageSystem.TouchInputEnabled = false
+    PageSystem.TweenTime = 0.300
+    
+    SettingsSite.Name = "SettingsSite"
+    SettingsSite.Parent = SiteOutMaster
+    SettingsSite.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    SettingsSite.BackgroundTransparency = 1.000
+    SettingsSite.BorderSizePixel = 0
+    SettingsSite.Position = UDim2.new(0, 0, 0.987500012, 0)
+    SettingsSite.Size = UDim2.new(0, 351, 0, 160)
+    
+    AllSettings.Name = "AllSettings"
+    AllSettings.Parent = SettingsSite
+    AllSettings.Active = true
+    AllSettings.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    AllSettings.BackgroundTransparency = 1.000
+    AllSettings.Position = UDim2.new(0.0299145319, 0, 0.0500000007, 0)
+    AllSettings.Size = UDim2.new(0, 331, 0, 100)
+    AllSettings.BottomImage = ""
+    AllSettings.ScrollBarThickness = 8
+    AllSettings.TopImage = ""
+    
+    SettingLayout.Name = "SettingLayout"
+    SettingLayout.Parent = AllSettings
+    SettingLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    SettingLayout.Padding = UDim.new(0, 3)
+    
+    SettingPadding.Name = "SettingPadding"
+    SettingPadding.Parent = AllSettings
+    SettingPadding.PaddingBottom = UDim.new(0, 1)
+    SettingPadding.PaddingLeft = UDim.new(0, 1)
+    SettingPadding.PaddingTop = UDim.new(0, 1)
+    
+    DiscordSite.Name = "DiscordSite"
+    DiscordSite.Parent = SiteOutMaster
+    DiscordSite.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    DiscordSite.BackgroundTransparency = 1.000
+    DiscordSite.BorderSizePixel = 0
+    DiscordSite.Position = UDim2.new(0, 0, 1.97500002, 0)
+    DiscordSite.Size = UDim2.new(0, 351, 0, 160)
+    
+    PromptDiscord.Name = "PromptDiscord"
+    PromptDiscord.Parent = DiscordSite
+    PromptDiscord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    PromptDiscord.BorderSizePixel = 0
+    PromptDiscord.Position = UDim2.new(0.210412517, 0, 0.193749994, 0)
+    PromptDiscord.Size = UDim2.new(0, 200, 0, 50)
+    PromptDiscord.Font = Enum.Font.SourceSans
+    PromptDiscord.Text = "Direct Join (Discord App Required)"
+    PromptDiscord.TextColor3 = Color3.fromRGB(0, 0, 0)
+    PromptDiscord.TextSize = 14.000
+    
+    CopyDiscord.Name = "CopyDiscord"
+    CopyDiscord.Parent = DiscordSite
+    CopyDiscord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CopyDiscord.BorderSizePixel = 0
+    CopyDiscord.Position = UDim2.new(0.210412517, 0, 0.493750006, 0)
+    CopyDiscord.Size = UDim2.new(0, 200, 0, 50)
+    CopyDiscord.Font = Enum.Font.SourceSans
+    CopyDiscord.Text = "Copy Invite Code"
+    CopyDiscord.TextColor3 = Color3.fromRGB(0, 0, 0)
+    CopyDiscord.TextSize = 14.000
+    
+    TopFrame.Name = "TopFrame"
+    TopFrame.Parent = Main
+    TopFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TopFrame.BackgroundTransparency = 1.000
+    TopFrame.Size = UDim2.new(0, 365, 0, 34)
+    
+    Discord.Name = "Discord"
+    Discord.Parent = TopFrame
+    Discord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Discord.BackgroundTransparency = 1.000
+    Discord.Position = UDim2.new(0.156164408, 0, 0, 0)
+    Discord.Size = UDim2.new(0, 27, 0, 27)
+    Discord.Image = "rbxassetid://00"
+    local getownasset = getsynasset or getcustomasset
+    if getownasset then
+        if a.StatusCode == 200 then
+            writefile('test.png', a)
+            Discord.Image = getownasset('test.png')
+            delfile('test.png')
+        else
+            Discord.Image = "http://www.roblox.com/asset/?id=4832957972" 
+        end
+    else
+        Discord.Image = "http://www.roblox.com/asset/?id=4832957972"
+    end
+    
+    Close.Name = "Close"
+    Close.Parent = TopFrame
+    Close.BackgroundTransparency = 1.000
+    Close.Position = UDim2.new(0.926027417, 0, 0, 0)
+    Close.Size = UDim2.new(0, 27, 0, 27)
+    Close.ZIndex = 2
+    Close.Image = "rbxassetid://3926305904"
+    Close.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    Close.ImageRectOffset = Vector2.new(924, 724)
+    Close.ImageRectSize = Vector2.new(36, 36)
+    
+    Settings.Name = "Settings"
+    Settings.Parent = TopFrame
+    Settings.BackgroundTransparency = 1.000
+    Settings.LayoutOrder = 1
+    Settings.Position = UDim2.new(0.078082189, 0, 0, 0)
+    Settings.Size = UDim2.new(0, 27, 0, 27)
+    Settings.ZIndex = 2
+    Settings.Image = "rbxassetid://3926307971"
+    Settings.ImageColor3 = Color3.fromRGB(12, 12, 12)
+    Settings.ImageRectOffset = Vector2.new(324, 124)
+    Settings.ImageRectSize = Vector2.new(36, 36)
+    
+    Home.Name = "Home"
+    Home.Parent = TopFrame
+    Home.BackgroundTransparency = 1.000
+    Home.LayoutOrder = 2
+    Home.Position = UDim2.new(-0.00136986375, 0, 0, 0)
+    Home.Size = UDim2.new(0, 27, 0, 27)
+    Home.ZIndex = 2
+    Home.Image = "rbxassetid://3926305904"
+    Home.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    Home.ImageRectOffset = Vector2.new(964, 204)
+    Home.ImageRectSize = Vector2.new(36, 36)
+    
+    Title.Name = "Title"
+    Title.Parent = TopFrame
+    Title.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+    Title.BorderSizePixel = 0
+    Title.Position = UDim2.new(0.230136991, 0, 0, 0)
+    Title.Size = UDim2.new(0, 200, 0, 20)
+    Title.Font = Enum.Font.GothamBold
+    Title.Text = "Jail Rob by Hold#4564"
+    Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Title.TextSize = 14.000
+    Title.TextYAlignment = Enum.TextYAlignment.Bottom
+    
+    LogFrame.Name = "LogFrame"
+    LogFrame.Parent = Main
+    LogFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LogFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    LogFrame.BorderSizePixel = 0
+    LogFrame.Position = UDim2.new(1.01917803, 0, 0, 0)
+    LogFrame.Size = UDim2.new(0, 0, 0, 200) -- UDim2.new(0, 155, 0, 200)
+    LogFrame.ClipsDescendants = true
+    
+    AllLogs.Name = "AllLogs"
+    AllLogs.Parent = LogFrame
+    AllLogs.Active = true
+    AllLogs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    AllLogs.Position = UDim2.new(0.0363663211, 0, 0.0350000001, 0)
+    AllLogs.Size = UDim2.new(0, 143, 0, 187)
+    AllLogs.BottomImage = ""
+    AllLogs.ScrollBarThickness = 8
+    AllLogs.TopImage = ""
+    
+    LogsLayout.Name = "LogsLayout"
+    LogsLayout.Parent = AllLogs
+    LogsLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    LogsLayout.Padding = UDim.new(0, 3)
+    
+    LogsPadding.Name = "LogsPadding"
+    LogsPadding.Parent = AllLogs
+    LogsPadding.PaddingBottom = UDim.new(0, 1)
+    LogsPadding.PaddingLeft = UDim.new(0, 1)
+    LogsPadding.PaddingTop = UDim.new(0, 1)
+    
+    AlertFrame.Name = "AlertFrame"
+    AlertFrame.Parent = Main
+    AlertFrame.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+    AlertFrame.BackgroundTransparency = 1.000
+    AlertFrame.Size = UDim2.new(0, 365, 0, 201)
+
+    local dragToggle = nil
+	local dragSpeed = 0.12
+	local dragStart = nil
+	local startPos = nil
+ 
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(Main, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+ 
+	TopFrame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = Main.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+ 
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+
+    Home.MouseButton1Click:Connect(function()
+        PageSystem:JumpTo(MainSite)
+    end)
+    Settings.MouseButton1Click:Connect(function()
+        PageSystem:JumpTo(SettingsSite)
+    end)
+    Discord.MouseButton1Click:Connect(function()
+        PageSystem:JumpTo(DiscordSite)
+    end)
+
+    CopyDiscord.MouseButton1Click:Connect(function()
+        setclipboard("https://discord.gg/rEZh7qmCUH")
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Jail Rob",
+            Text = "Copied Discord Invite."
+        })
+    end)
+    PromptDiscord.MouseButton1Click:Connect(function()
+        local rhttp = game:GetService('HttpService') 
+        local req = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or getgenv().request or request
+        if req then
+            req({
+                Url = 'http://127.0.0.1:6463/rpc?v=1',
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json',
+                    Origin = 'https://discord.com'
+                },
+                Body = rhttp:JSONEncode({
+                    cmd = 'INVITE_BROWSER',
+                    nonce = rhttp:GenerateGUID(false),
+                    args = {code = 'rEZh7qmCUH'}
+                })
+            })
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Jail Rob",
+                Text = "Check your discord app."
+            })
+        else
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Jail Rob",
+                Text = "Your exploit doesn't support instance join, sorry."
+            })
+        end
+    end)
+
+    local fadetwnspeed = 0.4
+    Close.MouseButton1Click:Connect(function()
+        for i, v in pairs(JBAR:GetDescendants()) do
+            if v:IsA("TextLabel") or v:IsA("TextButton") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {TextTransparency = 1}, false)
+            elseif v:IsA("Frame") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+            elseif v:IsA("ScrollingFrame") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {ScrollBarImageTransparency = 1}, false)
+            elseif v:IsA("ImageButton") then
+                Utility:Tween(v, fadetwnspeed, {BackgroundTransparency = 1}, false)
+                Utility:Tween(v, fadetwnspeed, {BorderSizePixel = 0}, false)
+                Utility:Tween(v, fadetwnspeed, {ImageTransparency = 1}, false)
+            end
+        end
+        wait(fadetwnspeed)
+        JBAR:Destroy()
+    end)
+    Close.MouseButton1Click:Connect(function()
+        closeui()
+    end)
+
+    EnableButon.MouseButton1Click:Connect(function()
+        if EnableButon.Text == "Enable" then
+            local word = string.split("Disable", "")
+            Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(231, 0, 3)}, false)
+            EnableButon.Text = ""
+            for i, v in pairs(word) do
+                EnableButon.Text = EnableButon.Text..v
+                wait(0.1)
+            end
+        elseif EnableButon.Text == "Disable" then
+            local word = string.split("Enable", "")
+            Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(0, 231, 3)}, false)
+            EnableButon.Text = ""
+            for i, v in pairs(word) do
+                EnableButon.Text = EnableButon.Text..v
+                wait(0.1)
+            end
+        end
+    end)
+    EnableButon.MouseButton1Click:Connect(function()
+        if EnableButon.Text == "Enable" then
+            enablebutton(false)
+        elseif EnableButon.Text == "Disable" then
+            enablebutton(true)
+        end
+    end)
+    AbortButton.MouseButton1Click:Connect(function()
+        if AbortButton.Text == "Abort" then
+            local word1 = string.split("Aborting..", "")
+            local word2 = string.split("Abort", "")
+            Utility:Tween(AbortButton, 0.4, {BackgroundColor3 = Color3.fromRGB(0, 85, 255)}, false)
+            AbortButton.Text = ""
+            for i, v in pairs(word1) do
+                AbortButton.Text = AbortButton.Text..v
+                wait(0.1)
+            end
+            wait(2.4)
+            Utility:Tween(AbortButton, 0.4, {BackgroundColor3 = Color3.fromRGB(0, 68, 206)}, false)
+            AbortButton.Text = ""
+            for i, v in pairs(word2) do
+                AbortButton.Text = AbortButton.Text..v
+                wait(0.1)
+            end
+        end
+    end)
+    AbortButton.MouseButton1Click:Connect(function()
+        abortbutton()
+    end)
+
+    AllLogs.CanvasPosition = Vector2.new(0, LogsLayout.AbsoluteContentSize.Y - AllLogs.AbsoluteSize.Y)
+    LogsLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        AllLogs.CanvasPosition = Vector2.new(0, LogsLayout.AbsoluteContentSize.Y - AllLogs.AbsoluteSize.Y)
+    end)
+    
+    local Config = {}
+
+    function Config:setStatus(text)
+        local text = string.split(text, "")
+        StatusLabel.Text = "Status: "
+        for i, v in pairs(text) do
+            StatusLabel.Text = StatusLabel.Text..v
+            wait(0.04)
+        end
+    end
+    function Config:addLog(text, color)
+        local Log = Instance.new("TextLabel")
+
+        Log.Name = "Log"
+        Log.Parent = AllLogs
+        Log.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Log.BackgroundTransparency = 1.000
+        Log.Size = UDim2.new(0, 132, 0, 26)
+        Log.Font = Enum.Font.Gotham
+        Log.Text = text or "Log"
+        Log.TextColor3 = color or Color3.fromRGB(0, 0, 0)
+        Log.TextSize = 14.000
+
+        AllLogs.CanvasSize = UDim2.new(0, 0, 0, LogsLayout.AbsoluteContentSize.Y)
+    end
+    function Config:addSetting(settingtype, settingname, callback, args)
+        local callback = callback or function() end
+        local settingtype = settingtype or ""
+        local args = args or {}
+
+        if settingtype == "Toggle" then
+            local Toggle = Instance.new("Frame")
+            local ToggleLabel = Instance.new("TextLabel")
+            local ToggleTrigger = Instance.new("TextButton")
+
+            Toggle.Name = "Toggle"
+            Toggle.Parent = AllSettings
+            Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Toggle.Position = UDim2.new(0, 0, 0.0187500007, 0)
+            Toggle.Size = UDim2.new(0, 319, 0, 32)
+            
+            ToggleLabel.Name = "ToggleLabel"
+            ToggleLabel.Parent = Toggle
+            ToggleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ToggleLabel.BorderSizePixel = 0
+            ToggleLabel.Position = UDim2.new(0.0125391847, 0, 0, 0)
+            ToggleLabel.Size = UDim2.new(0, 255, 0, 32)
+            ToggleLabel.Font = Enum.Font.Gotham
+            ToggleLabel.Text = settingname or "Toggle"
+            ToggleLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            ToggleLabel.TextSize = 14.000
+            ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            
+            ToggleTrigger.Name = "ToggleTrigger"
+            ToggleTrigger.Parent = Toggle
+            ToggleTrigger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ToggleTrigger.Position = UDim2.new(0.913793087, 0, 0.25, 0)
+            ToggleTrigger.Size = UDim2.new(0, 16, 0, 16)
+            ToggleTrigger.Font = Enum.Font.GothamBold
+            ToggleTrigger.Text = ""
+            ToggleTrigger.TextColor3 = Color3.fromRGB(0, 0, 0)
+            ToggleTrigger.TextScaled = true
+            ToggleTrigger.TextSize = 14.000
+            ToggleTrigger.TextWrapped = true
+
+            if args[1] then
+                if typeof(args[1]) == "boolean" then
+                    if args[1] == true then
+                        ToggleTrigger.Text = "x"
+                        callback(true)
+                    elseif args[1] == false then
+                        ToggleTrigger.Text = ""
+                        callback(false)
+                    end
+                end
+            else
+                callback(false)
+            end
+            if args[2] then
+                ToggleLabel.TextColor3 = args[2]
+            else
+                callback(false)
+            end
+
+            ToggleTrigger.MouseButton1Click:Connect(function()
+                if ToggleTrigger.Text == "x" then
+                    ToggleTrigger.Text = ""
+                    callback(false)
+                elseif ToggleTrigger.Text == "" then
+                    ToggleTrigger.Text = "x"
+                    callback(true)
+                end
+            end)
+
+            local settingConfig = {}
+
+            function settingConfig:setColor(color)
+                ToggleLabel.TextColor3 = color
+            end
+
+            return settingConfig
+        elseif settingtype == "Textbox" then
+            local Textbox = Instance.new("Frame")
+            local TextboxLabel = Instance.new("TextLabel")
+            local TextBoxInput = Instance.new("TextBox")
+
+            Textbox.Name = "Textbox"
+            Textbox.Parent = AllSettings
+            Textbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Textbox.Position = UDim2.new(0, 0, 0.0187500007, 0)
+            Textbox.Size = UDim2.new(0, 319, 0, 32)
+            
+            TextboxLabel.Name = "TextboxLabel"
+            TextboxLabel.Parent = Textbox
+            TextboxLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextboxLabel.BorderSizePixel = 0
+            TextboxLabel.Position = UDim2.new(0.0125391847, 0, 0, 0)
+            TextboxLabel.Size = UDim2.new(0, 230, 0, 32)
+            TextboxLabel.Font = Enum.Font.Gotham
+            TextboxLabel.Text = settingname or "Textbox"
+            TextboxLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextboxLabel.TextSize = 14.000
+            TextboxLabel.TextXAlignment = Enum.TextXAlignment.Left
+            
+            TextBoxInput.Name = "TextBoxInput"
+            TextBoxInput.Parent = Textbox
+            TextBoxInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextBoxInput.Position = UDim2.new(0.764890254, 0, 0.25, 0)
+            TextBoxInput.Size = UDim2.new(0, 63, 0, 16)
+            TextBoxInput.Font = Enum.Font.Gotham
+            TextBoxInput.Text = ""
+            TextBoxInput.PlaceholderText = "value here"
+            TextBoxInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextBoxInput.TextScaled = true
+            TextBoxInput.TextSize = 14.000
+            TextBoxInput.TextWrapped = true
+
+            TextBoxInput.FocusLost:Connect(function()
+                callback(TextBoxInput.Text)
+            end)
+        end
+    end
+    function Config:setAlert()
+        Utility:Tween(AlertFrame, 0.35, {BackgroundTransparency = 0.3}, true)
+        Utility:Tween(AlertFrame, 0.3, {BackgroundTransparency = 1}, true)
+        Utility:Tween(AlertFrame, 0.35, {BackgroundTransparency = 0.3}, true)
+        Utility:Tween(AlertFrame, 0.3, {BackgroundTransparency = 1}, true)
+    end
+    function Config:toggleLogs()
+        if LogFrame.Size == UDim2.new(0, 155, 0, 200) then --close
+            Utility:Tween(LogFrame, 0.3, {Size = UDim2.new(0, 0, 0, 200)})
+            Utility:Tween(LogFrame, 0.3, {BorderSizePixel = 0})
+        elseif LogFrame.Size == UDim2.new(0, 0, 0, 200) then --open
+            Utility:Tween(LogFrame, 0.3, {Size = UDim2.new(0, 155, 0, 200)})
+            Utility:Tween(LogFrame, 0.3, {BorderSizePixel = 3})
+        end
+    end
+
+    return Config
+
+end
+
+return Library

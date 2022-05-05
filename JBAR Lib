@@ -491,12 +491,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
     local Config = {}
 
     function Config:setStatus(text)
-        local text = string.split(text, "")
-        StatusLabel.Text = "Status: "
-        for i, v in pairs(text) do
-            StatusLabel.Text = StatusLabel.Text..v
-            wait(0.04)
-        end
+        StatusLabel.Text = "Status: "..text
     end
     function Config:addLog(text, color)
         local Log = Instance.new("TextLabel")

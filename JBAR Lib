@@ -459,9 +459,9 @@ function Library:Window(enablebutton, abortbutton, closeui)
         end
     end)
     EnableButon.MouseButton1Click:Connect(function()
-        if EnableButon.Text == "Enable" then
+        if EnableButon.Text == "Enabled" then
             enablebutton(false)
-        elseif EnableButon.Text == "Disable" then
+        elseif EnableButon.Text == "Disabled" then
             enablebutton(true)
         end
     end)

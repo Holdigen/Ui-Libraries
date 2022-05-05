@@ -122,13 +122,13 @@ function Library:Window(enablebutton, abortbutton, closeui)
     StatusCorner.Name = "StatusCorner"
     StatusCorner.Parent = StatusOut
     
-    EnableButon.Name = "EnableButon"
+    EnableButon.Name = "EnableButton"
     EnableButon.Parent = MainSite
     EnableButon.BackgroundColor3 = Color3.fromRGB(231, 0, 3)
     EnableButon.Position = UDim2.new(0.0541310534, 0, 0.543749988, 0)
     EnableButon.Size = UDim2.new(0, 150, 0, 50)
     EnableButon.Font = Enum.Font.GothamSemibold
-    EnableButon.Text = "Disable"
+    EnableButon.Text = "Disabled"
     EnableButon.TextColor3 = Color3.fromRGB(0, 0, 0)
     EnableButon.TextSize = 16.000
     EnableButon.TextWrapped = true
@@ -441,7 +441,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
 
     EnableButon.MouseButton1Click:Connect(function()
         if EnableButon.Text == "Enable" then
-            local word = string.split("Disable", "")
+            local word = string.split("Disabled", "")
             Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(231, 0, 3)}, false)
             EnableButon.Text = ""
             for i, v in pairs(word) do
@@ -449,7 +449,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
                 wait(0.1)
             end
         elseif EnableButon.Text == "Disable" then
-            local word = string.split("Enable", "")
+            local word = string.split("Enabled", "")
             Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(0, 231, 3)}, false)
             EnableButon.Text = ""
             for i, v in pairs(word) do
@@ -655,4 +655,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
 
 end
 
-return Library
+local l = Library:Window()
+
+
+l:setStatus("fuck nigaaa")

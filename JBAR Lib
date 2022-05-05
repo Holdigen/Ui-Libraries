@@ -655,7 +655,4 @@ function Library:Window(enablebutton, abortbutton, closeui)
 
 end
 
-local l = Library:Window()
-
-
-l:setStatus("fuck nigaaa")
+return Library

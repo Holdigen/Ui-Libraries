@@ -440,7 +440,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
     end)
 
     EnableButon.MouseButton1Click:Connect(function()
-        if EnableButon.Text == "Enable" then
+        if EnableButon.Text == "Enabled" then
             local word = string.split("Disabled", "")
             Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(231, 0, 3)}, false)
             EnableButon.Text = ""
@@ -448,7 +448,7 @@ function Library:Window(enablebutton, abortbutton, closeui)
                 EnableButon.Text = EnableButon.Text..v
                 wait(0.1)
             end
-        elseif EnableButon.Text == "Disable" then
+        elseif EnableButon.Text == "Disabled" then
             local word = string.split("Enabled", "")
             Utility:Tween(EnableButon, 0.4, {BackgroundColor3 = Color3.fromRGB(0, 231, 3)}, false)
             EnableButon.Text = ""

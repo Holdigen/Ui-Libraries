@@ -1012,7 +1012,99 @@ function Library:Window(gamename, uimaincolor)
 
             end
 
-            function  Container:Textbox(textboxname, presettext, callback)
+            function Container:ReadOnly(readonlyname, minvalue, maxvalue, startvalue)
+
+                local minvalue = minvalue or 1
+                local maxvalue = maxvalue or 100
+                local startvalue = startvalue or 50
+
+                local SliderReadOnly = Instance.new("Frame")
+                local SliderReadOnlyCorner = Instance.new("UICorner")
+                local SliderReadOnlyOut = Instance.new("Frame")
+                local SliderReadOnlyOutCorner = Instance.new("UICorner")
+                local SliderReadOnlyIn = Instance.new("Frame")
+                local SliderReadOnlyInCorner = Instance.new("UICorner")
+                local SliderReadOnlyName = Instance.new("TextLabel")
+                local SliderReadOnlyValue = Instance.new("TextLabel")
+
+                SliderReadOnly.Name = "SliderReadOnly"
+                SliderReadOnly.Parent = Section
+                SliderReadOnly.BackgroundColor3 = Color3.fromRGB(29, 32, 40)
+                SliderReadOnly.BorderSizePixel = 0
+                SliderReadOnly.Position = UDim2.new(0.0189189184, 0, 0.915309429, 0)
+                SliderReadOnly.Size = UDim2.new(0, 356, 0, 60)
+
+                SliderReadOnlyCorner.CornerRadius = UDim.new(0, 5)
+                SliderReadOnlyCorner.Name = "SliderReadOnlyCorner"
+                SliderReadOnlyCorner.Parent = SliderReadOnly
+
+                SliderReadOnlyOut.Name = "SliderReadOnlyOut"
+                SliderReadOnlyOut.Parent = SliderReadOnly
+                SliderReadOnlyOut.BackgroundColor3 = Color3.fromRGB(24, 27, 33)
+                SliderReadOnlyOut.Position = UDim2.new(0.015212669, 0, 0.375, 0)
+                SliderReadOnlyOut.Size = UDim2.new(0, 344, 0, 29)
+
+                SliderReadOnlyOutCorner.CornerRadius = UDim.new(0, 15)
+                SliderReadOnlyOutCorner.Name = "SliderReadOnlyOutCorner"
+                SliderReadOnlyOutCorner.Parent = SliderReadOnlyOut
+
+                SliderReadOnlyIn.Name = "SliderReadOnlyIn"
+                SliderReadOnlyIn.Parent = SliderReadOnlyOut
+                SliderReadOnlyIn.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
+                SliderReadOnlyIn.Size = UDim2.new(0, 172, 0, 29)
+
+                SliderReadOnlyInCorner.CornerRadius = UDim.new(0, 15)
+                SliderReadOnlyInCorner.Name = "SliderReadOnlyInCorner"
+                SliderReadOnlyInCorner.Parent = SliderReadOnlyIn
+
+                SliderReadOnlyName.Name = "SliderReadOnlyName"
+                SliderReadOnlyName.Parent = SliderReadOnly
+                SliderReadOnlyName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                SliderReadOnlyName.BackgroundTransparency = 1.000
+                SliderReadOnlyName.Position = UDim2.new(0.252808988, 0, -0.0155171715, 0)
+                SliderReadOnlyName.Size = UDim2.new(0, 185, 0, 24)
+                SliderReadOnlyName.Font = Enum.Font.GothamSemibold
+                SliderReadOnlyName.Text = readonlyname or "Read-Only"
+                SliderReadOnlyName.TextColor3 = Color3.fromRGB(255, 255, 255)
+                SliderReadOnlyName.TextSize = 14.000
+                SliderReadOnlyName.TextTransparency = 0.200
+
+                SliderReadOnlyValue.Name = "SliderReadOnlyValue"
+                SliderReadOnlyValue.Parent = SliderReadOnly
+                SliderReadOnlyValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                SliderReadOnlyValue.BackgroundTransparency = 1.000
+                SliderReadOnlyValue.Position = UDim2.new(0.35275647, 0, 0.384482831, 0)
+                SliderReadOnlyValue.Size = UDim2.new(0, 105, 0, 28)
+                SliderReadOnlyValue.Font = Enum.Font.GothamSemibold
+                SliderReadOnlyValue.Text = tostring((startvalue or 50)).." / "..tostring((maxvalue or 100))
+                SliderReadOnlyValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+                SliderReadOnlyValue.TextSize = 14.000
+                SliderReadOnlyValue.TextTransparency = 0.200
+
+                Section.Size = Section.Size + UDim2.new(0, 0, 0, SliderReadOnly.Size.Y.Offset + SectionItemList.Padding.Offset)
+                Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)
+
+                Utility:Tween(SliderReadOnlyIn, 0.3, {Size = UDim2.new(startvalue / maxvalue, 0, 0, 29)})
+
+                local Config = {}
+
+                function Config:Update(minval, maxval, postostart)
+                    minvalue = minval or 1
+                    maxvalue = maxval or 100
+                    startvalue = postostart or 50
+                    SliderReadOnlyValue.Text = tostring((startvalue or 50)).." / "..tostring((maxvalue or 100))
+                    Utility:Tween(SliderReadOnlyIn, 0.3, {Size = UDim2.new((startvalue or 0) / maxvalue, 0, 0, 29)})
+                end
+                function Config:SliderTo(value)
+                    SliderReadOnlyValue.Text = tostring((value or 50)).." / "..tostring((maxvalue or 100))
+                    Utility:Tween(SliderReadOnlyIn, 0.3, {Size = UDim2.new((value or 0) / maxvalue, 0, 0, 29)})
+                end
+
+                return Config
+
+            end
+
+            function Container:Textbox(textboxname, presettext, callback)
                 
                 local callback = callback or function() end
                 

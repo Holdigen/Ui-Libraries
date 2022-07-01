@@ -579,12 +579,13 @@ function Library:Window(gamename, uimaincolor)
         Page.BackgroundTransparency = 1.000
         Page.BorderSizePixel = 0
         Page.Position = UDim2.new(0.290740728, 0, 0.0125000002, 0)
-        Page.Size = UDim2.new(0, 376, 0, 390)
+        Page.Size = UDim2.new(0, 376, 0, 0) -- 390
         Page.BottomImage = ""
         Page.CanvasPosition = Vector2.new(0, 260)
         Page.ScrollBarThickness = 2
         Page.TopImage = ""
-        Page.Visible = false --// true
+        Page.Visible = true
+        Page.ClipsDescendants = true
 
         PageList.Name = "PageList"
         PageList.Parent = Page
@@ -592,7 +593,7 @@ function Library:Window(gamename, uimaincolor)
         PageList.SortOrder = Enum.SortOrder.LayoutOrder
         PageList.Padding = UDim.new(0, 3)
 
-        local pagetweenspeed = 0.14
+        local pagetweenspeed = 0.28
 
         TabButtonTrigger.MouseButton1Click:Connect(function()
             for i, v in pairs(TabHolder:GetChildren()) do
@@ -602,14 +603,14 @@ function Library:Window(gamename, uimaincolor)
                 end
             end
             for i, v in pairs(Pages:GetChildren()) do
-                v.Visible = false
+                Utility:Tween(v, pagetweenspeed, {Size = UDim2.new(0, 376, 0, 0)})
             end
             Utility:Tween(TabButton, pagetweenspeed, {BackgroundTransparency = 0})
             Utility:Tween(TabButtonName, pagetweenspeed, {TextTransparency = 0.2})
-            Page.Visible = true
+            Utility:Tween(Page, pagetweenspeed, {Size = UDim2.new(0, 376, 0, 390)})
         end)
 
-        Pages:FindFirstChild("Page").Visible = true
+        Utility:Tween(Pages:FindFirstChild("Page"), pagetweenspeed, {Size = UDim2.new(0, 376, 0, 390)})
         Utility:Tween(TabHolder:FindFirstChild("TabButton"), pagetweenspeed, {BackgroundTransparency = 0})
         Utility:Tween(TabHolder:FindFirstChild("TabButton").TabButtonName, pagetweenspeed, {TextTransparency = 0.2})
 
@@ -704,6 +705,14 @@ function Library:Window(gamename, uimaincolor)
                 Section.Size = Section.Size + UDim2.new(0, 0, 0, Button.Size.Y.Offset + SectionItemList.Padding.Offset)
                 Page.CanvasSize = UDim2.new(0, 0, 0, PageList.AbsoluteContentSize.Y)
 
+                local Config = {}
+
+                function Config:Text(newtext)
+                    Button.Text = newtext
+                end
+
+                return Config
+
             end
 
             function Container:Toggle(togglename, preset, callback)
@@ -755,7 +764,7 @@ function Library:Window(gamename, uimaincolor)
                 
                 ToggleOut.Name = "ToggleOut"
                 ToggleOut.Parent = Toggle
-                ToggleOut.BackgroundColor3 = Color3.fromRGB(212, 212, 212)
+                ToggleOut.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                 ToggleOut.BackgroundTransparency = 0.200
                 ToggleOut.Position = UDim2.new(0.915730357, 0, 0.25, 0)
                 ToggleOut.Size = UDim2.new(0, 20, 0, 20)
@@ -1052,6 +1061,7 @@ function Library:Window(gamename, uimaincolor)
                 SliderReadOnlyIn.Parent = SliderReadOnlyOut
                 SliderReadOnlyIn.BackgroundColor3 = Color3.fromRGB(37, 41, 49)
                 SliderReadOnlyIn.Size = UDim2.new(0, 172, 0, 29)
+                SliderReadOnlyIn.BorderSizePixel = 0
 
                 SliderReadOnlyInCorner.CornerRadius = UDim.new(0, 15)
                 SliderReadOnlyInCorner.Name = "SliderReadOnlyInCorner"
@@ -1088,14 +1098,16 @@ function Library:Window(gamename, uimaincolor)
 
                 local Config = {}
 
-                function Config:Update(minval, maxval, postostart)
+                function Config:Update(minval, maxval, postostart, name)
                     minvalue = minval or 1
                     maxvalue = maxval or 100
                     startvalue = postostart or 50
+                    local name = name or readonlyname
+                    SliderReadOnlyName.Text = name
                     SliderReadOnlyValue.Text = tostring((startvalue or 50)).." / "..tostring((maxvalue or 100))
                     Utility:Tween(SliderReadOnlyIn, 0.3, {Size = UDim2.new((startvalue or 0) / maxvalue, 0, 0, 29)})
                 end
-                function Config:SliderTo(value)
+                function Config:SlideTo(value)
                     SliderReadOnlyValue.Text = tostring((value or 50)).." / "..tostring((maxvalue or 100))
                     Utility:Tween(SliderReadOnlyIn, 0.3, {Size = UDim2.new((value or 0) / maxvalue, 0, 0, 29)})
                 end

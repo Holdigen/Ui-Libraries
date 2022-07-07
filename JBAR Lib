@@ -1,5 +1,5 @@
 local Utility = loadstring(
-    game:HttpGet("https://hold4564.de/utility.lua")
+    game:HttpGet("https://hold4564.de/LuaScripts/Utility/utility.txt")
 )()
 
 local http_request = (syn and syn.request) or http_request or request or (http and http.request)
